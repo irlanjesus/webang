@@ -1,0 +1,59 @@
+<div class="btn btn-secondary btn-icon-split">
+  <span class="icon text-white-50">
+    <i class="fas fa-search"></i>
+  </span>
+  <button
+    data-toggle="collapse"
+    data-target="#inclui"
+    class="btn btn-secondary"
+  >
+    Faturas fora do prazo
+  </button>
+</div>
+<div>
+  <div id="inclui" class="collapse">
+    <div>
+      <form #mesForm="ngForm" (ngSubmit)="envia()" class="form-inline">
+        <div>
+          <label for="mes"> Selecione o mês: {{ mes }} </label>
+          <select id="mes"name="mes" [(ngModel)]="mes" required>
+            <option value="01">Janeiro</option>
+            <option value="02">Fevereiro</option>
+            <option value="03">Março</option>
+            <option value="04">Abril</option>
+            <option value="05">Maio</option>
+            <option value="06">Junho</option>
+            <option value="07">Julho</option>
+            <option value="08">Agosto</option>
+            <option value="09">Setembro</option>
+            <option value="10">Outubro</option>
+            <option value="11">Novembro</option>
+            <option value="12">Dezembro</option>
+          </select>
+          <button class="btn btn-primary mx-2" type="submit">Consulta</button>
+        </div>
+      </form>
+    </div>
+    <br />
+    <div style="background-color: lightgray" [hidden]="!enviado" class="shadow">
+      <b>Faturas:</b><br />
+      <ol>
+        <div *ngFor="let fatura of lista_foradoprazo">
+          <li>
+            {{ fatura.empresa }} - Data pagto em:
+            <span style="color: blue">
+              {{ fatura.dt_pagto | date : "dd/MMM/yyyy" }}
+            </span>
+            e Data de vencto em:
+            <span style="color: blue"
+              >{{ fatura.dt_vencto | date : "dd/MMM/yyyy" }}
+            </span>
+          </li>
+        </div>
+      </ol>
+      <button class="btn btn-dark btn-sm ml-2" (click)="enviado = false">
+        Desliga
+      </button>
+    </div>
+  </div>
+</div>
